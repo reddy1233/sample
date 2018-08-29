@@ -1,0 +1,19 @@
+"2018-08-29 19:07:59 [main] INFO  c.comopt.touchpoint.ApplicationTest - Starting ApplicationTest on 8c85902eb11f.ant.amazon.com with PID 13268 (started by sajedp in /Users/sajedp/work/learning/sample)
+""2018-08-29 19:07:59 [main] INFO  c.comopt.touchpoint.ApplicationTest - No active profile set, falling back to default profiles: default
+""2018-08-29 19:07:59 [main] INFO  o.s.c.a.AnnotationConfigApplicationContext - Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@7ef82753: startup date [Wed Aug 29 19:07:59 IST 2018]; root of context hierarchy
+""2018-08-29 19:07:59 [main] INFO  o.s.s.a.ScheduledAnnotationBeanPostProcessor - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+""2018-08-29 19:07:59 [pool-1-thread-1] INFO  com.comopt.touchpoint.ScheduledTasks - The time is now 19:07:59
+""2018-08-29 19:07:59 [main] INFO  c.comopt.touchpoint.ApplicationTest - Started ApplicationTest in 0.754 seconds (JVM running for 1.597)
+""2018-08-29 19:07:59 [Thread-2] INFO  o.s.c.a.AnnotationConfigApplicationContext - Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@7ef82753: startup date [Wed Aug 29 19:07:59 IST 2018]; root of context hierarchy
+""2018-08-29 19:08:17 [main] INFO  com.comopt.touchpoint.Application - Starting Application on 8c85902eb11f.ant.amazon.com with PID 13274 (/Users/sajedp/work/learning/sample/target/classes started by sajedp in /Users/sajedp/work/learning/sample)
+""2018-08-29 19:08:17 [main] INFO  com.comopt.touchpoint.Application - No active profile set, falling back to default profiles: default
+""2018-08-29 19:08:17 [main] INFO  o.s.c.a.AnnotationConfigApplicationContext - Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@184cf7cf: startup date [Wed Aug 29 19:08:17 IST 2018]; root of context hierarchy
+""2018-08-29 19:08:17 [main] INFO  o.s.j.e.a.AnnotationMBeanExporter - Registering beans for JMX exposure on startup
+""2018-08-29 19:08:17 [main] INFO  o.s.s.a.ScheduledAnnotationBeanPostProcessor - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+""2018-08-29 19:08:17 [pool-1-thread-1] INFO  com.comopt.touchpoint.ScheduledTasks - The time is now 19:08:17
+""2018-08-29 19:08:17 [main] INFO  com.comopt.touchpoint.Application - Started Application in 0.909 seconds (JVM running for 1.242)
+""2018-08-29 19:08:22 [pool-1-thread-1] INFO  com.comopt.touchpoint.ScheduledTasks - The time is now 19:08:22
+""2018-08-29 19:08:27 [pool-1-thread-1] INFO  com.comopt.touchpoint.ScheduledTasks - The time is now 19:08:27
+""2018-08-29 19:08:32 [Thread-2] INFO  o.s.c.a.AnnotationConfigApplicationContext - Closing org.springframework.context.annotation.AnnotationConfigApplicationContext@184cf7cf: startup date [Wed Aug 29 19:08:17 IST 2018]; root of context hierarchy
+""2018-08-29 19:08:32 [Thread-2] INFO  o.s.j.e.a.AnnotationMBeanExporter - Unregistering JMX-exposed beans on shutdown
+"

@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.comopt.touchpoint.ApplicationTest
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.502 s - in com.comopt.touchpoint.ApplicationTest

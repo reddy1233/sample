@@ -8,8 +8,12 @@
     <buildCommand>
       <name>org.eclipse.jdt.core.javabuilder</name>
     </buildCommand>
+    <buildCommand>
+      <name>org.eclipse.buildship.core.gradleprojectbuilder</name>
+    </buildCommand>
   </buildSpec>
   <natures>
     <nature>org.eclipse.jdt.core.javanature</nature>
+    <nature>org.eclipse.buildship.core.gradleprojectnature</nature>
   </natures>
 </projectDescription>

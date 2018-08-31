@@ -10,6 +10,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.comopt.touchpoint.service.TouchPointActorService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
 public class ScheduledTasks {
@@ -29,6 +31,16 @@ public class ScheduledTasks {
     
     @Scheduled(fixedRate = 60000)
     public void usecaseName() {
-    	 log.info(""+service.getTouchPointActors());
+    	
+    	ObjectMapper mapper = new ObjectMapper();
+    	String json;
+		try {
+			json = mapper.writeValueAsString(service.getTouchPointActors());
+			log.info("Touch Point JSON String "+json);
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	 
     }
 }

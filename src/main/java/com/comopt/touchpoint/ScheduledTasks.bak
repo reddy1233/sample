@@ -16,31 +16,31 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Component
 public class ScheduledTasks {
 
-    private static final Logger log = LoggerFactory.getLogger(ScheduledTasks.class);
+	private static final Logger log = LoggerFactory.getLogger(ScheduledTasks.class);
 
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
-   // @Scheduled(cron="")
-   // @Scheduled(fixedRate = 5000)
-    public void reportCurrentTime() {
-        log.info("The time is now {}", dateFormat.format(new Date()));
-    }
-    
-    @Autowired
-  private  TouchPointActorService service;
-    
-    @Scheduled(fixedRate = 60000)
-    public void usecaseName() {
-    	
-    	ObjectMapper mapper = new ObjectMapper();
-    	String json;
+	// @Scheduled(cron="")
+	// @Scheduled(fixedRate = 5000)
+	public void reportCurrentTime() {
+		log.info("The time is now {}", dateFormat.format(new Date()));
+	}
+
+	@Autowired
+	private TouchPointActorService service;
+
+	//@Scheduled(fixedRate = 6000000)
+	public void usecaseName() {
+
+		ObjectMapper mapper = new ObjectMapper();
+		String json;
 		try {
 			json = mapper.writeValueAsString(service.getTouchPointActors());
-			log.info("Touch Point JSON String "+json);
+			log.info("Touch Point JSON String " + json);
 		} catch (JsonProcessingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	 
-    }
+
+	}
 }

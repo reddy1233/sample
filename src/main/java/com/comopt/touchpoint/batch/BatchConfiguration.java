@@ -1,6 +1,10 @@
 package com.comopt.touchpoint.batch;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
+
+import javax.sql.DataSource;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
@@ -13,11 +17,11 @@ import org.springframework.batch.core.configuration.annotation.StepBuilderFactor
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.core.launch.support.SimpleJobLauncher;
 import org.springframework.batch.core.repository.JobRepository;
-import org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean;
-import org.springframework.batch.support.transaction.ResourcelessTransactionManager;
+import org.springframework.batch.item.database.JdbcCursorItemReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
@@ -28,19 +32,52 @@ import com.comopt.touchpoint.model.TouchPointActor;
 @EnableBatchProcessing
 @EnableScheduling
 public class BatchConfiguration {
+	
+	private final String QUERY ="select * from ccm_trans_audit ta, ccm_trans_dtls_audit tda, ccm_trans_dtls_strg_pfm_status_audit tdsps, ccm_trans_comm_chnl_status_audit tccsa, " + 
+			"ccm_trans_dtls_comm_chnl_status_audit tdcsa where " + 
+			" ta.trans_id = tda.trans_id  " + 
+			"and tda.trns_dtls_seq_id  = tdsps.trns_dtls_seq_id   " + 
+			"and ta.trans_id =tccsa.trans_id   " + 
+			"and ta.trans_id =tdcsa .trans_id  " + 
+			"and tdsps.strg_pfm_status= 'Accepted' " + 
+			"and tdcsa.comm_chnl_status_cd ='00'  ";
 
     @Autowired
     public JobBuilderFactory jobBuilderFactory;
 
     @Autowired
     public StepBuilderFactory stepBuilderFactory;
+    
+    @Autowired
+    private JobCompletionNotificationListener listener;
+    
+    @Autowired
+    private DataSource dataSource; 
    
     @Bean
-    public CustomItemReader reader() {
+    public JdbcCursorItemReader<TouchPointActor> reader(){
     	
-    	System.out.println("reader.....");
+    	System.out.println("dataSource>>>>>>"+dataSource);
     	
-     return new CustomItemReader();
+     JdbcCursorItemReader<TouchPointActor> reader = new JdbcCursorItemReader<TouchPointActor>();
+     reader.setDataSource(dataSource);
+     reader.setSql(QUERY);
+     reader.setRowMapper(new TouchPointActorRowMapper());
+     
+     return reader;
+    }
+    
+    public class TouchPointActorRowMapper implements RowMapper<TouchPointActor>{
+
+     @Override
+     public TouchPointActor mapRow(ResultSet rs, int rowNum) throws SQLException {
+    	 TouchPointActor tpa = new TouchPointActor();
+    	 tpa.setAppId(rs.getString("file_nm"));
+    	 tpa.setTransId(rs.getString("trans_id"));
+      
+      return tpa;
+     }
+     
     }
     
     @Bean
@@ -62,6 +99,7 @@ public class BatchConfiguration {
     public Job testJob() {
      return jobBuilderFactory.get("testJob")
        .incrementer(new RunIdIncrementer())
+       .listener(listener)
        .flow(step1())
        .end()
        .build();
@@ -90,13 +128,14 @@ public class BatchConfiguration {
     
    // @Scheduled(cron = "*/50 * * * * *")
     @Scheduled(fixedRate = 60000)
+    //@Scheduled(cron = "${scheduling.job.cron}")
   	public void perform() throws Exception {
 
   		System.out.println("Job Started at :" + new Date());
   		
   		AppConstant.isReadComplete = false;
 
-  		JobParameters param = new JobParametersBuilder().addString("JobID", String.valueOf(System.currentTimeMillis()))
+  		JobParameters param = new JobParametersBuilder().addString("TPA batch JobID", String.valueOf(System.currentTimeMillis()))
   				.toJobParameters();
 
   		JobExecution execution = jobLauncher.run(testJob(), param);

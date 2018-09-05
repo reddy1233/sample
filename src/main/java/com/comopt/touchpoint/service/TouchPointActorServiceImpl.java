@@ -15,10 +15,11 @@ import com.comopt.touchpoint.model.Touchpoint;
 
 @Component
 public class TouchPointActorServiceImpl implements TouchPointActorService {
-
+	
+	
 	@Override
 	public TouchPointActor getTouchPointActors() {
-
+		
 		//Integration business logic to get the data every 24 hours	
 		TouchPointActor tpa = new TouchPointActor();
 		List<Touchpoint> tpList = new ArrayList<>();

@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemProcessor;
 
-import com.comopt.touchpoint.AppConstant;
 import com.comopt.touchpoint.model.TouchPointActor;
 
 public class TPAItemProcessor implements ItemProcessor<TouchPointActor,TouchPointActor> {

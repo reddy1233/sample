@@ -51,4 +51,8 @@
 ""2018-09-05 23:03:16 [pool-1-thread-1] INFO  o.s.batch.core.job.SimpleStepHandler - Executing step: [chunkStep]
 ""2018-09-05 23:03:16 [pool-1-thread-1] INFO  c.c.t.batch.CustomItemWriter - Touch Point JSON String [{"appId":"Testing","transId":"1","etlBusinessRecordId":null,"sourceCd":null,"tenantId":0,"touchpoint":null}]
 ""2018-09-05 23:03:16 [pool-1-thread-1] INFO  o.s.b.c.l.support.SimpleJobLauncher - Job: [FlowJob: [name=testJob]] completed with the following parameters: [{TPA batch JobID=1536168796166}] and the following status: [COMPLETED]
+""2018-09-05 23:04:16 [pool-1-thread-1] INFO  o.s.b.c.l.support.SimpleJobLauncher - Job: [FlowJob: [name=testJob]] launched with the following parameters: [{TPA batch JobID=1536168856170}]
+""2018-09-05 23:04:16 [pool-1-thread-1] INFO  o.s.batch.core.job.SimpleStepHandler - Executing step: [chunkStep]
+""2018-09-05 23:04:16 [pool-1-thread-1] INFO  c.c.t.batch.CustomItemWriter - Touch Point JSON String [{"appId":"Testing","transId":"1","etlBusinessRecordId":null,"sourceCd":null,"tenantId":0,"touchpoint":null}]
+""2018-09-05 23:04:16 [pool-1-thread-1] INFO  o.s.b.c.l.support.SimpleJobLauncher - Job: [FlowJob: [name=testJob]] completed with the following parameters: [{TPA batch JobID=1536168856170}] and the following status: [COMPLETED]
 "

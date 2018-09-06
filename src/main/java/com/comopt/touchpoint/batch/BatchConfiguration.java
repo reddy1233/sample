@@ -1,8 +1,12 @@
 package com.comopt.touchpoint.batch;
 
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
+
 import javax.sql.DataSource;
+
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameters;
@@ -19,6 +23,7 @@ import org.springframework.batch.item.database.JdbcCursorItemReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 

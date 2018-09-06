@@ -1,0 +1,16 @@
+com/comopt/touchpoint/AppConstant.class
+com/comopt/touchpoint/model/Initiator.class
+com/comopt/touchpoint/service/TouchPointActorService.class
+com/comopt/touchpoint/batch/BatchConfiguration.class
+com/comopt/touchpoint/batch/CustomItemReader.class
+com/comopt/touchpoint/service/TouchPointActorServiceImpl.class
+com/comopt/touchpoint/model/Touchpoint.class
+com/comopt/touchpoint/model/ExtRefId.class
+com/comopt/touchpoint/Application.class
+com/comopt/touchpoint/batch/TPAItemProcessor.class
+com/comopt/touchpoint/batch/BatchConfiguration$TouchPointActorRowMapper.class
+com/comopt/touchpoint/batch/JobCompletionNotificationListener.class
+com/comopt/touchpoint/batch/CustomItemWriter.class
+com/comopt/touchpoint/model/Address.class
+com/comopt/touchpoint/model/TouchPointActor.class
+com/comopt/touchpoint/model/CommDetails.class

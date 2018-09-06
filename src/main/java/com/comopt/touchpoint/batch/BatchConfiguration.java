@@ -11,6 +11,7 @@ import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.batch.core.Step;
+import org.springframework.batch.core.configuration.annotation.DefaultBatchConfigurer;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
@@ -31,7 +32,7 @@ import com.comopt.touchpoint.model.TouchPointActor;
 @Configuration
 @EnableBatchProcessing
 @EnableScheduling
-public class BatchConfiguration {
+public class BatchConfiguration extends DefaultBatchConfigurer{
 	
 	private final String QUERY ="select * from ccm_trans_audit ta, ccm_trans_dtls_audit tda, ccm_trans_dtls_strg_pfm_status_audit tdsps, ccm_trans_comm_chnl_status_audit tccsa, " + 
 			"ccm_trans_dtls_comm_chnl_status_audit tdcsa where " + 
@@ -53,6 +54,13 @@ public class BatchConfiguration {
     
     @Autowired
     private DataSource dataSource; 
+    
+    @Override
+    public void setDataSource(DataSource dataSource) {
+    	//donot write spring batch metadata to database
+        // override to do not set datasource even if a datasource exist.
+        // initialize will use a Map based JobRepository (instead of database)
+    }
    
     @Bean
     public JdbcCursorItemReader<TouchPointActor> reader(){
@@ -71,6 +79,8 @@ public class BatchConfiguration {
 
      @Override
      public TouchPointActor mapRow(ResultSet rs, int rowNum) throws SQLException {
+    	 
+    	
     	 TouchPointActor tpa = new TouchPointActor();
     	 tpa.setAppId(rs.getString("file_nm"));
     	 tpa.setTransId(rs.getString("trans_id"));
@@ -88,7 +98,7 @@ public class BatchConfiguration {
     @Bean
     public Step step1() {
     	  return stepBuilderFactory.get("chunkStep")
-    		        .<TouchPointActor, TouchPointActor>chunk(1)
+    		        .<TouchPointActor, TouchPointActor>chunk(10)
     		        .reader(reader())
     		        .processor(processor())
     		        .writer(writer())

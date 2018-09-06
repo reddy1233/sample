@@ -1,11 +1,8 @@
 package com.comopt.touchpoint.batch;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
 import java.util.Date;
-
 import javax.sql.DataSource;
-
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameters;
@@ -21,12 +18,12 @@ import org.springframework.batch.item.database.JdbcCursorItemReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import com.comopt.touchpoint.AppConstant;
 import com.comopt.touchpoint.model.TouchPointActor;
+
 
 @Configuration
 @EnableBatchProcessing
@@ -38,9 +35,9 @@ public class BatchConfiguration {
 			" ta.trans_id = tda.trans_id  " + 
 			"and tda.trns_dtls_seq_id  = tdsps.trns_dtls_seq_id   " + 
 			"and ta.trans_id =tccsa.trans_id   " + 
-			"and ta.trans_id =tdcsa .trans_id  " + 
+			"and tda.trns_dtls_seq_id =tdcsa.trns_dtls_seq_id   " + 
 			"and tdsps.strg_pfm_status= 'Accepted' " + 
-			"and tdcsa.comm_chnl_status_cd ='00'  ";
+			"and tdcsa.comm_chnl_status_cd ='0'  ";
 
     @Autowired
     public JobBuilderFactory jobBuilderFactory;
@@ -66,20 +63,7 @@ public class BatchConfiguration {
      
      return reader;
     }
-    
-    public class TouchPointActorRowMapper implements RowMapper<TouchPointActor>{
-
-     @Override
-     public TouchPointActor mapRow(ResultSet rs, int rowNum) throws SQLException {
-    	 TouchPointActor tpa = new TouchPointActor();
-    	 tpa.setAppId(rs.getString("file_nm"));
-    	 tpa.setTransId(rs.getString("trans_id"));
-      
-      return tpa;
-     }
-     
-    }
-    
+  
     @Bean
     public TPAItemProcessor processor() {
         return new TPAItemProcessor();
@@ -128,7 +112,7 @@ public class BatchConfiguration {
     
    // @Scheduled(cron = "*/50 * * * * *")
     @Scheduled(fixedRate = 60000)
-    //@Scheduled(cron = "${scheduling.job.cron}")
+   // @Scheduled(cron = "${scheduling.job.cron}")
   	public void perform() throws Exception {
 
   		System.out.println("Job Started at :" + new Date());
